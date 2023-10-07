@@ -84,3 +84,14 @@ v4
 
 v5 <- d2 %>% filter(cut == "Ideal" & color == "D")
 v5
+
+str(d1)
+
+# Assignment 3B.1
+d1 %>% filter(
+  (gear == 3 | gear == 4) &
+    (cyl == 4 | cyl == 6)
+)
+
+# Assignment 3B.2
+aggregate(mpg ~ gear, d1, max)
