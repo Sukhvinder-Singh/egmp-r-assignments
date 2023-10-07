@@ -6,4 +6,4 @@ Our group:
 - Kritika Seth
 - Parul Gupta
 - Kanchan Nanda
-- Ankit Bhatiya
+- Ankit Bhatia
