@@ -81,3 +81,6 @@ v4 <- d2 %>%
   summarize(P = mean(price))
 
 v4
+
+v5 <- d2 %>% filter(cut == "Ideal" & color == "D")
+v5
