@@ -6,7 +6,7 @@ apply(m1, 2, sum)
 
 s1 <- function(v1) {
   p1 <- vector(mode = "numeric", length(v1))
-  for (i in 1:length(v1)) {
+  for (i in seq(1, length(v1))) {
     if (v1[i] %% 2 == 0) {
       p1[i] <- v1[i]
     }
@@ -57,9 +57,6 @@ aggregate(price ~ cut, d2, mean)
 
 b1 <- aggregate(price ~ cut + color, d2, mean)
 b2 <- aggregate(carat ~ cut + color, d2, mean)
-
-b3
-str(b3)
 
 str(d2)
 
