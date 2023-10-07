@@ -47,5 +47,37 @@ mapply(function(x, y) {
 tapply(d1$mpg, d1$cyl, mean)
 
 # install.packages("dplyr")
-
 library("dplyr")
+
+# install.packages("ggplot2")
+library("ggplot2")
+d2 <- diamonds
+str(d2)
+aggregate(price ~ cut, d2, mean)
+
+b1 <- aggregate(price ~ cut + color, d2, mean)
+b2 <- aggregate(carat ~ cut + color, d2, mean)
+
+b3
+str(b3)
+
+str(d2)
+
+v1 <- d2 %>% select(cut, carat)
+v1
+
+v2 <- d2 %>%
+  select(cut, carat, price) %>%
+  mutate(PC = price / carat)
+
+v2
+
+v3 <- d2 %>% slice(c(1, 4, 7, 9))
+v3
+
+v4 <- d2 %>%
+  select(cut, color, price) %>%
+  group_by(cut, color) %>%
+  summarize(P = mean(price))
+
+v4
