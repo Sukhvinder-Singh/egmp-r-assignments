@@ -45,3 +45,6 @@ aggregate(zn ~ chas, Boston, max)
 mean_mileage <- aggregate(mpg ~ gear + cyl, mt_cars_data, mean)
 mean_hp <- aggregate(hp ~ gear + cyl, mt_cars_data, mean)
 cbind(mean_hp, mean_mileage)
+
+# Alternate method: By combining mpg and hp together
+aggregate(cbind(mpg, hp) ~ gear + cyl, mt_cars_data, mean)
