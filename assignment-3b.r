@@ -26,3 +26,21 @@ mt_cars_data %>% filter(
 mt_cars_data %>%
   group_by(gear) %>%
   summarize(max(mpg))
+
+# Task 3: Use dplyr to give a tibble to give a comparison of gears
+# with both max mileage and max hp for each gear type
+mt_cars_data %>%
+  group_by(gear) %>%
+  summarize(max(mpg), max(hp))
+
+# Task 4: Use dplyr to give a tibble to present a display of gear type,
+# carb type together with max mileage, min mileage, max hp, min hp
+mt_cars_data %>%
+  group_by(gear, carb) %>%
+  summarize(max(mpg), min(mpg), max(hp), min(hp))
+
+# Task 5: Use dplyr to give a tibble to present a display of gear type,
+# with a mean for ratio of hp/cyl for each type
+mt_cars_data %>%
+  group_by(gear) %>%
+  summarize(mean(hp / cyl))
