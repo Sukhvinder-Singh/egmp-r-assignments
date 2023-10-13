@@ -9,6 +9,9 @@
 # Notes: We've used the latest R version 4.3.1.
 # We've also commented the file for line-by-line explanation.
 
+# Set terminal width
+options("width" = 500)
+
 # Uncomment below line to install dyplr package
 # install.packages("dplyr")
 library("dplyr")

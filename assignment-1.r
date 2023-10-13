@@ -12,6 +12,9 @@
 # single folder, and can be read with the code below, as we are dynamically
 # getting the working directory using R code.
 
+# Set terminal width
+options("width" = 500)
+
 # This gets the working directory
 working_dir <- getwd()
 # This line replaces windows forward slash with backslash

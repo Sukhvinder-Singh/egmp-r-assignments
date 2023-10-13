@@ -1,3 +1,6 @@
+# Set terminal width
+options("width" = 500)
+
 # Sum of rows
 m1 <- matrix(1:20, ncol = 4)
 m1
