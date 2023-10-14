@@ -59,3 +59,28 @@ pie(pie_data, labels = paste(round(k1, 2), "%"))
 # Making box plot
 d1 <- trees
 boxplot(d1)
+
+d1 <- trees
+
+# Strip chart
+stripchart(d1$Height, method = "overplot")
+stripchart(d1$Height, method = "jitter")
+
+# Curves
+curve(sin, -2 * pi, 2 * pi, col = "red")
+curve(cos, -2 * pi, 2 * pi, col = "blue", add = TRUE)
+
+# Curves with different functions
+curve(x^3, -2, 2, col = "red")
+curve(x^2, -2, 2, col = "blue", add = TRUE)
+
+# Creating grid
+par(mfrow = c(2, 2))
+plot(d1$Height, d1$Girth, type = "b")
+boxplot(d1$Girth)
+stripchart(d1$Height, method = "jitter")
+plot(d1$Height, d1$Volume, pch = "v")
+
+# Creating polygons
+plot(1:8, 1:8, type = "n")
+polygon(c(2, 6, 6, 2), c(3, 3, 6, 7), col = "blue")
