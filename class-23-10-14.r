@@ -84,3 +84,10 @@ plot(d1$Height, d1$Volume, pch = "v")
 # Creating polygons
 plot(1:8, 1:8, type = "n")
 polygon(c(2, 6, 6, 2), c(3, 3, 6, 7), col = "blue")
+
+x <- matrix(rep(1:10, 10), byrow = TRUE, ncol = 10)
+y <- matrix(rep(1:10, 10), ncol = 10)
+z <- x^2 + y^2
+
+# Creating perspective
+persp(volcano, col = "green")
