@@ -19,6 +19,7 @@ legend("topleft", fill = color, rownames(m1))
 barplot(m1, col = rainbow(5), xlab = "Month", ylab = "Sales", horiz = TRUE)
 legend("bottomright", fill = rainbow(5), rownames(m1))
 
+# Define bar plot with letters and numbers
 v1 <- 1:20
 y1 <- LETTERS[1:20]
 barplot(v1, xlab = "letters", ylab = "value", main = "Chart", names.arg = y1)
@@ -39,3 +40,22 @@ plot(density(b1))
 png(file = "files/sample-histogram.png")
 hist(b1, col = rainbow(5))
 dev.off()
+
+# Scatter plot
+plot(1:10, 11:20, pch = "x")
+
+# Get coordinates on click
+locator(1)
+text(2, 16, "Sukhvinder")
+
+# Pie chart
+pie_data <- c(2, 4, 5, 7, 12, 14, 16)
+pie(pie_data)
+
+# Defining labels for pie chart
+k1 <- pie_data * 100 / sum(pie_data)
+pie(pie_data, labels = paste(round(k1, 2), "%"))
+
+# Making box plot
+d1 <- trees
+boxplot(d1)
