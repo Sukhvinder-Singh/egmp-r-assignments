@@ -21,4 +21,21 @@ legend("bottomright", fill = rainbow(5), rownames(m1))
 
 v1 <- 1:20
 y1 <- LETTERS[1:20]
-barplot(v1, xlab = "letters", ylab = "value", main = "Chart")
+barplot(v1, xlab = "letters", ylab = "value", main = "Chart", names.arg = y1)
+
+# Adding horizontal line
+abline(h = mean(v1))
+
+# Adding vertical line
+abline(v = mean(v1))
+
+# Histogram
+hist(b1, col = rainbow(5))
+
+# Density plot
+plot(density(b1))
+
+# Saving file
+png(file = "files/sample-histogram.png")
+hist(b1, col = rainbow(5))
+dev.off()
