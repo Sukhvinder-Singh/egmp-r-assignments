@@ -30,3 +30,11 @@ nrow(tree_test)
 
 model_tree_a <- lm(Volume ~ Girth, data = tree_train)
 summary(model_tree_a)
+
+model_tree_b <- lm(Volume ~ Girth + Height, data = tree_train)
+summary(model_tree_b)
+
+pred_tree_a <- predict(model_tree_a, tree_test)
+pred_tree_b <- predict(model_tree_b, tree_test)
+
+mse_a <- sum((pred_tree_a - tree_test$Volume)^2) / nrow(tree_test)
