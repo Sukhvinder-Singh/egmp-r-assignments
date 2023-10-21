@@ -49,5 +49,66 @@ mse_b
 AIC(model_tree_a, model_tree_b)
 BIC(model_tree_a, model_tree_b)
 
+# Plots
 plot(model_tree_a, 1)
 plot(model_tree_a, 2)
+plot(model_tree_a, 3)
+plot(model_tree_a, 4)
+plot(model_tree_a, 5)
+plot(model_tree_a, 6)
+
+library("MASS")
+df1 <- Boston
+str(df1)
+
+# Correlation between variables
+cor(df1)
+
+df2 <- df1[, c("crim", "zn", "chas", "medv")]
+str(df2)
+boxplot(df2$medv)
+summary(df2)
+boxplot(df2)
+
+df2n <- df2[, c("crim", "zn", "medv")]
+df2c <- as.factor(df2$chas)
+str(df2c)
+
+df2n <- data.frame(lapply(df2n, standardize))
+str(df2n)
+
+df3 <- data.frame(
+  crim = df2n$crim,
+  zn = df2n$zn,
+  chas = df2$chas,
+  medv = df2n$medv
+)
+str(df3)
+
+df3$chas <- as.factor(df3$chas)
+str(df3)
+
+index2 <- sample(1:nrow(df3), round(0.7 * nrow(df3)))
+boston_train <- df3[index2, ]
+boston_test <- df3[-index2, ]
+
+nrow(boston_train)
+nrow(boston_test)
+
+model_boston_a <- lm(medv ~ crim + zn + chas, data = boston_train)
+summary(model_boston_a)
+
+model_boston_b <- lm(medv ~ crim * chas + zn, data = boston_train)
+summary(model_boston_b)
+
+ypred_boston_a <- predict(model_boston_a, boston_test)
+ypred_boston_b <- predict(model_boston_b, boston_test)
+
+mse_boston_a <- sum((ypred_boston_a - boston_test$medv)^2) / nrow(boston_test)
+mse_boston_b <- sum((ypred_boston_b - boston_test$medv)^2) / nrow(boston_test)
+
+mse_boston_a
+mse_boston_b
+
+plot(model_boston_a, 1)
+plot(model_boston_b, 1)
