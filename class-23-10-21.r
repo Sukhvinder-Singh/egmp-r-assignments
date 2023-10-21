@@ -14,12 +14,12 @@ boxplot(dt1$Girth)
 boxplot(dt1$Height)
 
 # Standardizing values
-standardize <- function(x) {
+custom_std <- function(x) {
   x <- (x - mean(x)) / sd(x)
   return(x)
 }
 
-dt2 <- data.frame(lapply(dt1, standardize))
+dt2 <- data.frame(lapply(dt1, custom_std))
 str(dt2)
 
 index <- sample(1:nrow(dt2), round(0.7 * nrow(dt2)))
@@ -74,7 +74,7 @@ df2n <- df2[, c("crim", "zn", "medv")]
 df2c <- as.factor(df2$chas)
 str(df2c)
 
-df2n <- data.frame(lapply(df2n, standardize))
+df2n <- data.frame(lapply(df2n, custom_std))
 str(df2n)
 
 df3 <- data.frame(
@@ -126,4 +126,76 @@ fd1 <- read.csv(
   header = TRUE
 )
 
+fd1$chd <- ifelse(fd1$chd == "Si", 1, 0)
+fd1$famhist <- ifelse(fd1$famhist == "Present", 1, 0)
 str(fd1)
+
+cor(fd1[, 1:9])
+
+fdf <- fd1[, c(1:3, 5, 6, 8, 10)]
+str(fdf)
+
+fdfn <- fdf[, c(1, 2, 3, 5, 6)]
+fdfn <- data.frame(lapply(fdfn, custom_std))
+str(fdfn)
+
+udf <- data.frame(fdfn, famhist = as.factor(fdf$famhist), chd = fdf$chd)
+str(udf)
+
+index3 <- sample(1:nrow(udf), round(0.7 * nrow(udf)))
+
+h_train <- udf[index3, ]
+h_test <- udf[-index3, ]
+
+nrow(h_train)
+nrow(h_test)
+
+model_h_a <- glm(
+  chd ~ sbp + tobacco + ldl + typea + alcohol + famhist,
+  family = binomial(link = "logit"),
+  data = h_train
+)
+
+summary(model_h_a)
+
+model_h_b <- glm(
+  chd ~ sbp + tobacco + ldl + typea + famhist,
+  family = binomial(link = "logit"),
+  data = h_train
+)
+
+summary(model_h_b)
+
+ypred_h_a <- predict(model_h_a, h_test, type = "response")
+head(ypred_h_a)
+
+ypred_h_b <- predict(model_h_b, h_test, type = "response")
+
+ypred_h_ma <- ifelse(ypred_h_a <= 0.5, 0, 1)
+ypred_h_mb <- ifelse(ypred_h_b <= 0.3, 0, 1)
+
+head(ypred_h_ma)
+
+t1 <- table(actual = h_test$chd, predicted = ypred_h_ma)
+t2 <- table(actual = h_test$chd, predicted = ypred_h_mb)
+t1
+t2
+
+# Uncomment below line to install dyplr package
+# install.packages("pROC")
+library("pROC")
+
+roc1 <- roc(h_test$chd, ypred_h_ma)
+roc2 <- roc(h_test$chd, ypred_h_mb)
+
+roc1
+roc2
+
+plot.roc(roc1)
+plot.roc(roc2)
+
+# Uncomment below line to install dyplr package
+# install.packages("caret")
+library("caret")
+
+confusionMatrix(t1)
