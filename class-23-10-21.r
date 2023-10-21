@@ -112,3 +112,18 @@ mse_boston_b
 
 plot(model_boston_a, 1)
 plot(model_boston_b, 1)
+
+# This gets the working directory
+working_dir <- getwd()
+# This line replaces windows forward slash with backslash
+working_dir_path <- gsub("\\", "/", working_dir, fixed = TRUE)
+
+# We set the working directory to read the files conveniently
+setwd(working_dir_path)
+
+fd1 <- read.csv(
+  paste(working_dir_path, "SAHeart.csv", sep = "/"),
+  header = TRUE
+)
+
+str(fd1)
