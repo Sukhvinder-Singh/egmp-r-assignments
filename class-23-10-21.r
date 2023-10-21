@@ -199,3 +199,6 @@ plot.roc(roc2)
 library("caret")
 
 confusionMatrix(t1)
+confusionMatrix(t2)
+
+# https://www.kaggle.com/ (Datasets here)
