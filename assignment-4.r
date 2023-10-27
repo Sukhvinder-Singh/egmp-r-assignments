@@ -21,7 +21,7 @@
 # pattern of scores obtained during schooling along with college/MBA/placement
 # test marks, will have effect on # the salary/package/CTC of the individual
 
-# All steps we followed for this assignment are also included as comments below,
+# All steps we followed for this assignment are also included as comments below
 
 # Set terminal width
 options("width" = 500)
